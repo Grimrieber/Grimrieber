@@ -4,98 +4,75 @@
 
 I build and modernize enterprise web applications on the Microsoft stack — currently in .NET 10, Blazor, and EF Core, with eleven years of VB.NET, C#, and MSSQL behind it. I work end to end: schema design and query tuning, through API layers, to the front end, plus the deployment and monitoring around it.
 
+[![Portfolio](https://img.shields.io/badge/Portfolio-grimrieber.github.io-2ea44f?style=flat-square&logo=github&logoColor=white)](https://grimrieber.github.io/Portfolio/)
 [![Email](https://img.shields.io/badge/Email-stephanr%40spydernetworkinc.com-0A66C2?style=flat-square&logo=maildotru&logoColor=white)](mailto:stephanr@spydernetworkinc.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-stephanrieber-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/stephanrieber)
-[![Portfolio](https://img.shields.io/badge/Portfolio-grimrieber.github.io%2FPortfolio-2ea44f?style=flat-square&logo=github&logoColor=white)](https://grimrieber.github.io/Portfolio)
 
 ---
 
-## Featured Work
+## Projects
 
-Most of what I build is either client-owned or internal business software, so the source stays private. These are writeups of real systems — architecture, decisions, and outcomes. **Happy to walk through any of them live, including code, in an interview.**
+Every repository below builds and runs. Each README states plainly what works, what needs setup, and what isn't built — no repo claims more than it does.
 
-### 🏋️ Apex Coaching — Personal Training Marketplace
+### [ApexCoaching](https://github.com/Grimrieber/ApexCoaching) — personal-training marketplace
 `.NET 10` `Blazor Server` `EF Core 10` `ASP.NET Core Identity` `SQL Server` `Stripe Connect`
 
-A full multi-tenant marketplace connecting trainers with clients, with three distinct role-based portals behind a single auth system.
+Twelve-entity domain model behind three role-scoped portals — admin, trainer, and client — sharing one identity system. Stripe Connect handles split payments with a platform commission per trainer; with no keys configured it falls back to simulated checkout so every flow stays walkable. Public marketing site, trainer directory, and a contact form that feeds the admin lead pipeline.
 
-- **Domain model:** Trainer, ClientProfile, Booking, Engagement, ServicePackage, TrainingProgram, Payment, and Lead entities mapped through EF Core with code-first migrations
-- **Three portals from one identity system** — Admin (overview, trainer approval, lead pipeline), Trainer (clients, packages, earnings, profile), and Client (booking, program, billing)
-- **Stripe Connect marketplace payments** — subscriptions and one-off bookings with the platform fee split per trainer commission rate; simulated checkout when no keys are set
-- **Public marketing surface** (pricing, how-it-works, trainer directory, demo) served from the same app with a separate layout
-- .NET 10 · 52 source files · EF Core code-first migrations
+*All three portals verified working end to end against seeded data.*
 
-> Built on the current .NET release with interactive server rendering — the same patterns I'd bring to a modern greenfield project.
+### [SEOOptimizer](https://github.com/Grimrieber/SEOOptimizer) — site auditing tool
+`VB.NET` `HtmlAgilityPack` `ASP.NET Web API` `SQL Server`
 
----
+A real crawler: HTTPS and mixed-content checks, meta and heading analysis, image `alt` coverage, internal link mapping, and broken-link detection with separate 5s/3s timeout budgets so one dead host can't stall a crawl. X509 validation callbacks keep it alive against real-world HTTPS. Audit, report, billing, and user concerns split into independent services.
 
-### 🔍 SEO Optimizer — Site Audit SaaS
-`VB.NET` `ASP.NET` `HtmlAgilityPack` `Web API` `SQL Server`
+*Verified by running a live audit and checking the results.*
 
-A crawler-driven site auditing tool structured as a subscription product, with the audit engine cleanly separated from billing and reporting.
+### [MultiTool](https://github.com/Grimrieber/MultiTool) — multi-app platform
+`VB.NET` `ASP.NET WebForms` `Entity Framework` `MSSQL`
 
-- **Audit engine** parses live pages via HtmlAgilityPack and scores: HTTPS enforcement, mixed-content detection, meta title/description presence, H1–H3 heading hierarchy, image `alt` coverage, and internal/external link mapping
-- **Broken-link detection** with independent request timeouts (5s page / 3s link) so one dead host can't stall a crawl
-- **Certificate handling** through `X509Certificate` validation callbacks for HTTPS edge cases
-- **Service-layer separation:** `AuditService`, `BillingService`, `ReportService`, `UserService` — each independently testable
-- Four-service architecture · live HTTP crawler
+Several business tools behind one hand-built account system — registration, email verification, expiring password-reset tokens. Includes an AdventureWorks reporting dashboard with an embedded RDLC report and a server-side PDF generator.
 
----
+### [OnlineShop](https://github.com/Grimrieber/OnlineShop) — multi-vendor marketplace
+`VB.NET` `Entity Framework` `SQL Server`
 
-### 🧰 MultiTool — Multi-App Web Platform
-`VB.NET` `ASP.NET WebForms` `Entity Framework` `MSSQL` `PDF Generation`
+Seventeen tables covering shops, products, categories, cart, orders, payments, reviews, and favourites — plus two-tier messaging (buyer↔seller threads and shop-level enquiries) and product view tracking.
 
-A single authenticated platform hosting several independent business tools behind shared identity and data access.
+### [FoodRecipes](https://github.com/Grimrieber/FoodRecipes) — recipe manager
+`VB.NET` `T-SQL`
 
-- **Complete account system** built from scratch: registration, login, email verification, password reset, and user settings
-- **AdventureWorks reporting dashboard** — parameterized queries and aggregations over the sample enterprise schema
-- **Resume/Portfolio generator** with server-side PDF output via a dedicated `PDFGenerator` class
-- **Calculator suite** for business/financial computations
-- Shared EF `MultiToolContext` and master-page layouts across all apps
-- Three applications behind one shared account system
+The database work is the point: tables, views, and stored procedures written by hand and kept in source, with nutrition reference data and a Python importer.
 
----
+### Also public
 
-### 🏢 Enterprise Data Warehouse & Vendor Import *(client work — code private)*
-`VB.NET` `ASP.NET` `MSSQL` `ETL`
+[Gamba](https://github.com/Grimrieber/Gamba) · [CouponApp](https://github.com/Grimrieber/CouponApp) · [TinyTools](https://github.com/Grimrieber/TinyTools) — smaller projects, honestly labelled in their READMEs.
 
-Vendor data ingestion platform replacing a manual spreadsheet process.
+[PythonFoundations](https://github.com/Grimrieber/PythonFoundations) — learning Python from scratch in 2023, twelve exercises in the order written.
 
-- Configurable **upload → validate → stage → commit** pipeline handling varied vendor file formats
-- Vendor management and data-correction screens for non-technical staff
-- Reporting dashboard surfacing ingest status and data quality
-- Delivered as V1 then rearchitected as V2 after production feedback
+### Client work — described, not published
 
----
+**Enterprise data warehouse** (VB.NET · MSSQL · ETL) — configurable vendor ingest pipeline, upload through validate, stage, and commit; rebuilt as V2 after production feedback.
 
-### 🔐 SAML SSO Billing Portal *(client work — code private)*
-`VB.NET` `ASP.NET` `SAML 2.0` `IIS`
+**SAML 2.0 SSO billing portal** (VB.NET · IIS) — service provider with metadata endpoint and single logout, built twice (middleware and dependency-free) to compare control against maintenance cost.
 
-Single sign-on integration letting members reach billing preferences through an external identity provider.
-
-- **SAML 2.0 service provider** with metadata endpoint, assertion consumer, and single-logout
-- Built in **two variants** — middleware-based and a dependency-free custom implementation — to evaluate the tradeoff between control and maintenance burden
-- Custom lightweight logging module for auditing the authentication handshake
+Source stays private. Happy to walk through either in an interview.
 
 ---
 
 ## Technical Stack
 
-**Languages & Frameworks**
-`.NET 10` `C#` `ASP.NET Core` `Blazor` `EF Core` `VB.NET` `ASP.NET MVC` `WebForms` `Web API` `Entity Framework` `JavaScript` `HTML5` `CSS3`
+**Languages & frameworks** — `.NET 10` `C#` `ASP.NET Core` `Blazor` `EF Core` `VB.NET` `ASP.NET MVC` `WebForms` `Web API` `JavaScript` `HTML5` `CSS3`
 
-**Data**
-`MSSQL` — schema design, stored procedures, triggers, functions, views · Query optimization · `SSRS` reporting · ETL & data warehousing
+**Data** — `MSSQL` schema design, stored procedures, triggers, views, functions · query optimization · `SSRS` · ETL & data warehousing
 
-**Practice & Infrastructure**
-`IIS` deployment · `Git` · REST integration · `SAML 2.0` · `Stripe` · Code review · Production debugging · Performance profiling
+**Practice & infrastructure** — `IIS` deployment · `Git` · REST & OData integration · `SAML 2.0` · `Stripe` · code review · production debugging · performance profiling
 
 ---
 
 ## Background
 
 **Senior Software Developer / Full-Stack VB.NET Developer** — Sirius Business, Lombard IL · *2015–Present*
-Refactored legacy VB.NET applications for a **20% page-load improvement**; built Web API endpoints against HTML5/JS front ends; introduced structured code review and production diagnostics that **cut production bugs 25%**; mentored a junior developer to mid-level in 12 months.
+Refactored legacy VB.NET applications for a **20% page-load improvement**; built Web API endpoints against HTML5/JavaScript front ends; introduced structured code review and production diagnostics that **cut production bugs 25%**; mentored a junior developer to mid-level in 12 months.
 
 **IT Director / DBA / Data Analyst** — Air. Water. Energy, Carol Stream IL · *2016–2023*
 Directed IT operations and **reduced system downtime 30%**. Owned MSSQL schema design, stored procedures, and performance tuning; built automated SSRS dashboards for executive reporting.
